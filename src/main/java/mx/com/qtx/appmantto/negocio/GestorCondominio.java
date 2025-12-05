@@ -1,5 +1,6 @@
 package mx.com.qtx.appmantto.negocio;
 
+import mx.com.qtx.appmantto.dtos.CondominioDTO;
 import mx.com.qtx.appmantto.persistencia.RepositorioCondominios;
 
 /**
@@ -10,9 +11,64 @@ public class GestorCondominio {
     private RepositorioCondominios repoCondominios;
 
     public static void main(String[] args) {
-        testFuncionesBasicas();
-        testRentarDepartamento();
-        testAsignarAdminitradorAcondominio();
+//        testFuncionesBasicas();
+//        testRentarDepartamento();
+//        testAsignarAdminitradorAcondominio();
+        testRepositorios();
+    }
+
+    private static void testRepositorios() {
+        testCrearRepositorioCondominios();
+        testLeerCondominioXID();
+        testInsertarCondominio();
+        testActualizarCondominio();
+        testEliminarCondominio();
+    }
+
+    private static void testEliminarCondominio() {
+        System.out.println("\nGestorCondominio.testEliminarCondominio");
+        RepositorioCondominios repoCondominios = new RepositorioCondominios();
+        repoCondominios.mostrarCondominios();
+        CondominioDTO condoBorrado = repoCondominios.eliminar(3);
+        System.out.println("condoBorrado = " + condoBorrado);
+        repoCondominios.mostrarCondominios();
+    }
+
+    private static void testActualizarCondominio() {
+        System.out.println("\nGestorCondominio.testActualizarCondominio");
+        RepositorioCondominios repoCondominios = new RepositorioCondominios();
+        CondominioDTO condominioDTO = repoCondominios.leerCondominioXID(2);
+        CondominioDTO condoNvo = new CondominioDTO(condominioDTO.getId(),"Av. Insurgentes Sur 2001, col. La Loba loca",
+                "ADM002", "Las guajolotas de Coapa");
+        int nUpdates = repoCondominios.actualizarCondominio(condoNvo);
+        System.out.println("nUpdates = " + nUpdates);
+        repoCondominios.mostrarCondominios();
+    }
+
+    private static void testInsertarCondominio() {
+        System.out.println("\nGestorCondominio.testInsertarCondominio");
+        RepositorioCondominios repoCondominios = new RepositorioCondominios();
+        CondominioDTO condoNvo = new CondominioDTO(55,"Av. Insurgentes Sur 1999, col. La Loba loca",
+                "ADM002", "Rincón del Cielo");
+        int nIns = repoCondominios.insertarCondominio(condoNvo);
+        System.out.println("nInserciones = " + nIns);
+        repoCondominios.mostrarCondominios();
+    }
+
+    private static void testLeerCondominioXID() {
+        System.out.println("\nGestorCondominio.testLeerCondominioXID");
+        RepositorioCondominios repoCondominios = new RepositorioCondominios();
+    //    repoCondominios.mostrarCondominios();
+        String condoI = repoCondominios.leerCondominioXID(2).toString();
+        System.out.println("condoI = " + condoI);
+    }
+
+    private static void testCrearRepositorioCondominios() {
+        System.out.println("\nGestorCondominio.testCrearRepositorioCondominios");
+        RepositorioCondominios repoCondominios = new RepositorioCondominios();
+        repoCondominios.leerTodos().stream()
+                .map(cndI -> cndI.getId() + " - " + cndI.getNombre())
+                .forEachOrdered(System.out::println);
     }
 
     private static void testAsignarAdminitradorAcondominio() {
