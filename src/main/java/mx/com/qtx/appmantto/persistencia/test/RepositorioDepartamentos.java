@@ -1,4 +1,4 @@
-package mx.com.qtx.appmantto.persistencia;
+package mx.com.qtx.appmantto.persistencia.test;
 
 import mx.com.qtx.appmantto.dtos.DepartamentoDTO;
 

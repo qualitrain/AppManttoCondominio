@@ -1,9 +1,11 @@
 package mx.com.qtx.appmantto.negocio;
 
+import mx.com.qtx.appmantto.comunicacion.AdminMensajesSMS;
 import mx.com.qtx.appmantto.dtos.CondominioDTO;
 import mx.com.qtx.appmantto.dtos.DepartamentoDTO;
-import mx.com.qtx.appmantto.persistencia.RepositorioCondominios;
-import mx.com.qtx.appmantto.persistencia.RepositorioDepartamentos;
+import mx.com.qtx.appmantto.persistencia.dbPostgreSQL.RepositorioCondominiosPostgres;
+import mx.com.qtx.appmantto.persistencia.test.RepositorioCondominios;
+import mx.com.qtx.appmantto.persistencia.test.RepositorioDepartamentos;
 
 import java.util.List;
 
@@ -12,12 +14,14 @@ import java.util.List;
  */
 public class GestorCondominio {
 
-    private RepositorioCondominios repoCondominios;
+    private IRepositorioCondominios repoCondominios;
     private RepositorioDepartamentos repoDepartamentos;
+    private IGestorMensajes gestorMensajes;
 
     public GestorCondominio() {
-        this.repoCondominios = new RepositorioCondominios();
+        this.repoCondominios = new RepositorioCondominiosPostgres();
         this.repoDepartamentos = new RepositorioDepartamentos();
+        this.gestorMensajes = new AdminMensajesSMS();
     }
 
     public List<String> getReglasOcupacion(Integer idCondominio, int numDepto){

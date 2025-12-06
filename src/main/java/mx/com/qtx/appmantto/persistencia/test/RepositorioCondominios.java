@@ -1,12 +1,13 @@
-package mx.com.qtx.appmantto.persistencia;
+package mx.com.qtx.appmantto.persistencia.test;
 
 import mx.com.qtx.appmantto.dtos.CondominioDTO;
+import mx.com.qtx.appmantto.negocio.IRepositorioCondominios;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RepositorioCondominios {
+public class RepositorioCondominios implements IRepositorioCondominios {
     private final static Map<Integer,CondominioDTO> mapCondominios = getMapaCondominios();
 
     private static Map<Integer, CondominioDTO> getMapaCondominios() {

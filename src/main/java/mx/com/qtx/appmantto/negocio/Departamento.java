@@ -151,4 +151,8 @@ public class Departamento {
     public void alquilarA(Persona persona) {
         throw new RuntimeException("Método no implementado");
     }
+
+    public BigDecimal calcularImpuestos(){
+        throw new RuntimeException("método no implementado");
+    }
 }
