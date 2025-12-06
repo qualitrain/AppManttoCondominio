@@ -1,5 +1,7 @@
 package mx.com.qtx.appmantto.dtos;
 
+import java.math.BigDecimal;
+
 public class DepartamentoDTO {
     private Long idDepartamento;
     private Integer numero;
@@ -9,6 +11,10 @@ public class DepartamentoDTO {
     private String idInquilino;
     private Integer idCondominio;
 
+    private TipoDepartamento tipo;
+
+    private BigDecimal importeDeposito;
+
     public DepartamentoDTO(Long idDepartamento, Integer numero, boolean ocupado, String nombreInquilino, double rentaMensual, String idInquilino, Integer idCondominio) {
         this.idDepartamento = idDepartamento;
         this.numero = numero;
@@ -17,8 +23,24 @@ public class DepartamentoDTO {
         this.rentaMensual = rentaMensual;
         this.idInquilino = idInquilino;
         this.idCondominio = idCondominio;
+
+        this.tipo = TipoDepartamento.GENERICO;
     }
 
+    public DepartamentoDTO(Long idDepartamento, Integer numero, boolean ocupado, String nombreInquilino, double rentaMensual, String idInquilino, Integer idCondominio,
+                           TipoDepartamento tipo, BigDecimal importeDeposito) {
+        this.idDepartamento = idDepartamento;
+        this.numero = numero;
+        this.ocupado = ocupado;
+        this.nombreInquilino = nombreInquilino;
+        this.rentaMensual = rentaMensual;
+        this.idInquilino = idInquilino;
+        this.idCondominio = idCondominio;
+
+        this.tipo = tipo;
+
+        this.importeDeposito = importeDeposito;
+    }
     public DepartamentoDTO() {
     }
 
@@ -76,6 +98,22 @@ public class DepartamentoDTO {
 
     public void setIdCondominio(Integer idCondominio) {
         this.idCondominio = idCondominio;
+    }
+
+    public TipoDepartamento getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoDepartamento tipo) {
+        this.tipo = tipo;
+    }
+
+    public BigDecimal getImporteDeposito() {
+        return importeDeposito;
+    }
+
+    public void setImporteDeposito(BigDecimal importeDeposito) {
+        this.importeDeposito = importeDeposito;
     }
 
     @Override

@@ -3,7 +3,9 @@ package mx.com.qtx.appmantto.persistencia;
 import mx.com.qtx.appmantto.dtos.CondominioDTO;
 import mx.com.qtx.appmantto.dtos.DepartamentoDTO;
 import mx.com.qtx.appmantto.dtos.PersonaDTO;
+import mx.com.qtx.appmantto.dtos.TipoDepartamento;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProveedorDatosPrueba {
@@ -43,7 +45,7 @@ public class ProveedorDatosPrueba {
             // Condominio 2 - 2 departamentos ocupados, 3 vacíos
             new DepartamentoDTO(6L, 201, true, personas.get(3).getNombre(), 5100.0, personas.get(3).getId(), 2),
             new DepartamentoDTO(7L, 202, false, null, 0.0, null, 2),
-            new DepartamentoDTO(8L, 203, true, personas.get(4).getNombre(), 4900.0, personas.get(4).getId(), 2),
+            new DepartamentoDTO(8L, 203, true, personas.get(4).getNombre(), 4900.0, personas.get(4).getId(), 2, TipoDepartamento.RESIDENCIAL, new BigDecimal("15000.00")),
             new DepartamentoDTO(9L, 204, false, null, 0.0, null, 2),
             new DepartamentoDTO(10L, 205, false, null, 0.0, null, 2),
             

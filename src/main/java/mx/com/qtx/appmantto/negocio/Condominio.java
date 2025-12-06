@@ -1,5 +1,8 @@
 package mx.com.qtx.appmantto.negocio;
 
+import mx.com.qtx.appmantto.dtos.TipoDepartamento;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +50,7 @@ public class Condominio {
         this.deptos.set(pos,nvoDepto);
      }
 
+     @Deprecated
     public void agregarDepartamento(Long idDepto, int numDepto, boolean ocupado, double renta, Inquilino inquilino){
         Departamento nvoDepto = new Departamento();
         nvoDepto.setInquilino(inquilino);
@@ -55,6 +59,13 @@ public class Condominio {
         nvoDepto.setOcupado(ocupado);
         nvoDepto.setRentaMensual(renta);
 
+        this.deptos.add(nvoDepto);
+    }
+
+    public void agregarDepartamento(Long idDepto, int numDepto, boolean ocupado, double renta,
+                                    Inquilino inquilino, TipoDepartamento tipo, BigDecimal importeDeposito){
+        Departamento nvoDepto = Departamento.crearDepartamento(idDepto,numDepto,ocupado,"",
+                                                        renta,inquilino,importeDeposito,tipo);
         this.deptos.add(nvoDepto);
     }
 

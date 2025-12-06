@@ -12,7 +12,14 @@ public class Cu_TesterCondominios {
 
     private static void test_consultarReglasOcupacion() {
         GestorCondominio gc = new GestorCondominio();
-        List<String> reglas = gc.getReglasOcupacion(2, 203);
-        System.out.println("reglas de ocupación = " + reglas);
+        int numDepto1 = 203;
+        List<String> reglas = gc.getReglasOcupacion(2, numDepto1);
+        System.out.println("reglas de ocupación del depto " + numDepto1 +
+                " = " + reglas);
+
+        numDepto1 = 201;
+        reglas = gc.getReglasOcupacion(2, numDepto1);
+        System.out.println("\nreglas de ocupación del depto " + numDepto1 +
+                " = " + reglas);
     }
 }

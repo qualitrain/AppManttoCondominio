@@ -39,7 +39,9 @@ public class GestorCondominio {
                                         deptoDtoI.getNumero(),
                                         deptoDtoI.isOcupado(),
                                         deptoDtoI.getRentaMensual(),
-                                null);
+                                null,
+                                        deptoDtoI.getTipo(),
+                                        deptoDtoI.getImporteDeposito());
         }
         condo.setAdministrador(null);
         return condo;

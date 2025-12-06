@@ -1,22 +1,33 @@
 package mx.com.qtx.appmantto.negocio;
 
 import jdk.jshell.spi.ExecutionControl;
+import mx.com.qtx.appmantto.dtos.TipoDepartamento;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Responsabilidad: Administrar los datos de cada departamento
  */
 public class Departamento {
-    private Long id;
-    private int numero;
-    private boolean ocupado;
-    private String nombreInquilino;
-    private double rentaMensual;
+    protected Long id;
+    protected int numero;
+    protected boolean ocupado;
+    protected String nombreInquilino;
+    protected double rentaMensual;
 
-    private Inquilino inquilino;
+    protected Inquilino inquilino;
 
     public Departamento() {
+    }
+
+    public Departamento(Long id, int numero, boolean ocupado, String nombreInquilino, double rentaMensual, Inquilino inquilino) {
+        this.id = id;
+        this.numero = numero;
+        this.ocupado = ocupado;
+        this.nombreInquilino = nombreInquilino;
+        this.rentaMensual = rentaMensual;
+        this.inquilino = inquilino;
     }
 
     public Departamento(int numero, boolean ocupado, String nombreInquilino, double rentaMensual) {
@@ -24,6 +35,16 @@ public class Departamento {
         this.ocupado = ocupado;
         this.nombreInquilino = nombreInquilino;
         this.rentaMensual = rentaMensual;
+    }
+
+    public static Departamento crearDepartamento(Long id, int numero, boolean ocupado, String nombreInquilino, double rentaMensual,
+                                                 Inquilino inquilino, BigDecimal importeDeposito, TipoDepartamento tipoDepartamento){
+
+        return switch(tipoDepartamento){
+            case GENERICO -> new Departamento(id, numero, ocupado, nombreInquilino, rentaMensual,inquilino);
+            case RESIDENCIAL -> new DeptoResidencial(id,numero,ocupado,"",rentaMensual,inquilino,importeDeposito);
+            default -> null;
+        };
     }
 
     public Long getId() {
