@@ -1,5 +1,7 @@
 package mx.com.qtx.appmantto.negocio;
 
+import jdk.jshell.spi.ExecutionControl;
+
 /**
  * Responsabilidad: Administrar los datos de cada departamento
  */
@@ -9,7 +11,7 @@ public class Departamento {
     private String nombreInquilino;
     private double rentaMensual;
 
-    private Persona inquilino;
+    private Inquilino inquilino;
 
     public Departamento() {
     }
@@ -103,7 +105,6 @@ public class Departamento {
     }
 
     public void alquilarA(Persona persona) {
-        this.inquilino = persona;
-        persona.setDepto(this);
+        throw new RuntimeException("Método no implementado");
     }
 }

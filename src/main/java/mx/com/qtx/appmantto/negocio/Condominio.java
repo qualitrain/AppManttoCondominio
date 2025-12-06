@@ -12,15 +12,15 @@ public class Condominio {
 
     private ArrayList<Departamento> deptos;
 
-    private Persona administrador;
+    private Administrador administrador;
 
 
-    @Deprecated
-    public Condominio(String direccion, String nombreAdministrador) {
-        this(direccion,new Persona(nombreAdministrador,"indefinido","indefinido"));
-    }
+//    @Deprecated
+//    public Condominio(String direccion, String nombreAdministrador) {
+//        this(direccion,new Persona(nombreAdministrador,"indefinido","indefinido"));
+//    }
 
-    public Condominio(String direccion, Persona administrador) {
+    public Condominio(String direccion, Administrador administrador) {
         this.direccion = direccion;
         this.administrador = administrador;
 
@@ -32,9 +32,9 @@ public class Condominio {
         return administrador;
     }
 
-    public void setAdministrador(Persona administrador) {
+    public void setAdministrador(Administrador administrador) {
         this.administrador = administrador;
-        this.administrador.setCondomonioAdministrado(this);
+//        this.administrador.setCondomonioAdministrado(this);
     }
 
     public void setDepartamento(int numDepto, boolean ocupado, String inquilino, double renta, int pos){
@@ -110,14 +110,7 @@ public class Condominio {
     }
 
     public Condominio clonar() {
-        Condominio clon = new Condominio();
-        clon.direccion = this.direccion;
-        for(Departamento deptoI:this.deptos){
-            clon.deptos.add(deptoI.clonar());
-        }
-        if(this.administrador != null)
-            clon.administrador = this.administrador.clonar();
-        return clon;
+        throw new RuntimeException("Método no implementado");
     }
 
     public void copiarA(Condominio cndDestino) {
