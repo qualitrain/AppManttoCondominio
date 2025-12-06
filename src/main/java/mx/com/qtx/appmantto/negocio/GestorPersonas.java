@@ -32,11 +32,6 @@ public class GestorPersonas {
         personas.forEach(pI -> System.out.println("pI = " + pI.toString()));
         System.out.println();
 
-//        List<Administrador> administradores = new ArrayList<>();
-//        administradores.add((Administrador) pedro2);
-    //    administradores.add((Administrador) juan);
-
-//        administradores.forEach(pI -> System.out.println("pI = " + pI));
 
         List<Object> objetos = new ArrayList<>();
         objetos.add("Cadena");

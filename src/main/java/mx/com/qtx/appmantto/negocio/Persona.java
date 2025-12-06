@@ -1,7 +1,7 @@
 package mx.com.qtx.appmantto.negocio;
 
 public class Persona {
-    private String nombre;
+    protected String nombre;
     private String id;
     private String telefono;
 //    private Condominio condomonioAdministrado;

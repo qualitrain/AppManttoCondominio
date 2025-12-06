@@ -1,7 +1,11 @@
 package mx.com.qtx.appmantto.negocio;
 
 import mx.com.qtx.appmantto.dtos.CondominioDTO;
+import mx.com.qtx.appmantto.dtos.DepartamentoDTO;
 import mx.com.qtx.appmantto.persistencia.RepositorioCondominios;
+import mx.com.qtx.appmantto.persistencia.RepositorioDepartamentos;
+
+import java.util.List;
 
 /**
  *  Ofrecer los servicios que permiten administrar un Condominio
@@ -9,6 +13,37 @@ import mx.com.qtx.appmantto.persistencia.RepositorioCondominios;
 public class GestorCondominio {
 
     private RepositorioCondominios repoCondominios;
+    private RepositorioDepartamentos repoDepartamentos;
+
+    public GestorCondominio() {
+        this.repoCondominios = new RepositorioCondominios();
+        this.repoDepartamentos = new RepositorioDepartamentos();
+    }
+
+    public List<String> getReglasOcupacion(Integer idCondominio, int numDepto){
+        Condominio cond = leerCondominioXID(idCondominio);
+        return cond.getReglasOcupacion(numDepto);
+    }
+
+    private Condominio leerCondominioXID(Integer idCondominio) {
+        CondominioDTO condDTO = this.repoCondominios.leerCondominioXID(idCondominio);
+        List<DepartamentoDTO> deptosDTO = this.repoDepartamentos.leerDepartamentosXCondominio(condDTO.getId());
+        Condominio condo = new Condominio();
+        condo.setId(condDTO.getId());
+        condo.setDireccion(condDTO.getDireccion());
+        /* ToDo
+        *   Leer de Repositorio de Personas al administrador y a los inquilinos
+        * */
+        for(DepartamentoDTO deptoDtoI:deptosDTO) {
+            condo.agregarDepartamento(deptoDtoI.getIdDepartamento(),
+                                        deptoDtoI.getNumero(),
+                                        deptoDtoI.isOcupado(),
+                                        deptoDtoI.getRentaMensual(),
+                                null);
+        }
+        condo.setAdministrador(null);
+        return condo;
+    }
 
     public static void main(String[] args) {
 //        testFuncionesBasicas();

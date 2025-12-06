@@ -2,10 +2,13 @@ package mx.com.qtx.appmantto.negocio;
 
 import jdk.jshell.spi.ExecutionControl;
 
+import java.util.List;
+
 /**
  * Responsabilidad: Administrar los datos de cada departamento
  */
 public class Departamento {
+    private Long id;
     private int numero;
     private boolean ocupado;
     private String nombreInquilino;
@@ -23,7 +26,21 @@ public class Departamento {
         this.rentaMensual = rentaMensual;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Inquilino getInquilino() {
+        return inquilino;
+    }
+
+    public void setInquilino(Inquilino inquilino) {
+        this.inquilino = inquilino;
+    }
 
     public int getNumero() {
         return numero;
@@ -47,6 +64,7 @@ public class Departamento {
         return this.inquilino.getNombre();
     }
 
+    @Deprecated
     public void setNombreInquilino(String nombreInquilino) {
         this.nombreInquilino = nombreInquilino;
     }
@@ -102,6 +120,11 @@ public class Departamento {
         destino.rentaMensual = origen.rentaMensual;
         destino.nombreInquilino = origen.nombreInquilino;
         destino.ocupado = origen.ocupado;
+    }
+
+    public List<String> getReglasOcupacion(){
+        return List.of("No romper nada",
+                        "No molestar a los vecinos");
     }
 
     public void alquilarA(Persona persona) {

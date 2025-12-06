@@ -1,6 +1,7 @@
 package mx.com.qtx.appmantto.negocio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Responsabilidad: Administrar datos de un Condominio
@@ -8,17 +9,12 @@ import java.util.ArrayList;
 public class Condominio {
     public static final int DEPTO_NO_DISPONIBLE = -1;
 
+    private Integer id;
     private String direccion;
 
     private ArrayList<Departamento> deptos;
 
     private Administrador administrador;
-
-
-//    @Deprecated
-//    public Condominio(String direccion, String nombreAdministrador) {
-//        this(direccion,new Persona(nombreAdministrador,"indefinido","indefinido"));
-//    }
 
     public Condominio(String direccion, Administrador administrador) {
         this.direccion = direccion;
@@ -26,6 +22,14 @@ public class Condominio {
 
         this.deptos = new ArrayList<>();
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Persona getAdministrador() {
@@ -37,10 +41,22 @@ public class Condominio {
 //        this.administrador.setCondomonioAdministrado(this);
     }
 
-    public void setDepartamento(int numDepto, boolean ocupado, String inquilino, double renta, int pos){
+    @Deprecated
+    public void agregarDepartamento(int numDepto, boolean ocupado, String inquilino, double renta, int pos){
         Departamento nvoDepto = new Departamento(numDepto,ocupado,inquilino,renta);
         this.deptos.set(pos,nvoDepto);
      }
+
+    public void agregarDepartamento(Long idDepto, int numDepto, boolean ocupado, double renta, Inquilino inquilino){
+        Departamento nvoDepto = new Departamento();
+        nvoDepto.setInquilino(inquilino);
+        nvoDepto.setId(idDepto);
+        nvoDepto.setNumero(numDepto);
+        nvoDepto.setOcupado(ocupado);
+        nvoDepto.setRentaMensual(renta);
+
+        this.deptos.add(nvoDepto);
+    }
 
     public Condominio() {
         this.direccion = "indefinida";
@@ -131,5 +147,23 @@ public class Condominio {
         }
         depto.alquilarA(persona);
 
+    }
+
+    /**
+     *
+     * @param numDepto
+     * @return
+     */
+    public List<String> getReglasOcupacion(int numDepto){
+        Departamento deptoBuscado = this.buscarDepto(numDepto);
+        return deptoBuscado.getReglasOcupacion();
+    }
+
+    private Departamento buscarDepto(int numDepto) {
+        for(Departamento deptoI:this.deptos){
+            if(deptoI.getNumero() == numDepto)
+                return deptoI;
+        }
+        return null;
     }
 }
