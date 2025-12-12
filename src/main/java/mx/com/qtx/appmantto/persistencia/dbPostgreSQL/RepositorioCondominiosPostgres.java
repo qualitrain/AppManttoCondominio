@@ -8,7 +8,7 @@ import java.util.List;
 public class RepositorioCondominiosPostgres implements IRepositorioCondominios {
     @Override
     public CondominioDTO leerCondominioXID(Integer id) {
-        return null;
+        throw new RuntimeException("Método no implementado en " +  this.getClass().getName());
     }
 
     @Override

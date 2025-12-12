@@ -1,6 +1,7 @@
 package mx.com.qtx.appmantto.negocio;
 
 import mx.com.qtx.appmantto.dtos.TipoDepartamento;
+import mx.com.qtx.appmantto.negocio.errores.DeptoInexistenteException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -165,8 +166,11 @@ public class Condominio {
      * @param numDepto
      * @return
      */
-    public List<String> getReglasOcupacion(int numDepto){
+    public List<String> getReglasOcupacion(int numDepto)  {
         Departamento deptoBuscado = this.buscarDepto(numDepto);
+        if(deptoBuscado == null){
+            throw new DeptoInexistenteException("No existe depto con numDepto = " + numDepto);
+        }
         return deptoBuscado.getReglasOcupacion();
     }
 

@@ -3,6 +3,7 @@ package mx.com.qtx.appmantto.negocio;
 import mx.com.qtx.appmantto.comunicacion.AdminMensajesSMS;
 import mx.com.qtx.appmantto.dtos.CondominioDTO;
 import mx.com.qtx.appmantto.dtos.DepartamentoDTO;
+import mx.com.qtx.appmantto.negocio.errores.CondominioDTOInexistenteException;
 import mx.com.qtx.appmantto.persistencia.dbPostgreSQL.RepositorioCondominiosPostgres;
 import mx.com.qtx.appmantto.persistencia.test.RepositorioCondominios;
 import mx.com.qtx.appmantto.persistencia.test.RepositorioDepartamentos;
@@ -19,7 +20,8 @@ public class GestorCondominio {
     private IGestorMensajes gestorMensajes;
 
     public GestorCondominio() {
-        this.repoCondominios = new RepositorioCondominiosPostgres();
+        this.repoCondominios = new RepositorioCondominios();
+//        this.repoCondominios = new RepositorioCondominiosPostgres();
         this.repoDepartamentos = new RepositorioDepartamentos();
         this.gestorMensajes = new AdminMensajesSMS();
     }
@@ -31,6 +33,11 @@ public class GestorCondominio {
 
     private Condominio leerCondominioXID(Integer idCondominio) {
         CondominioDTO condDTO = this.repoCondominios.leerCondominioXID(idCondominio);
+
+        if(condDTO == null){
+            throw new CondominioDTOInexistenteException(condDTO,idCondominio,this.repoCondominios.getClass().getName());
+        }
+
         List<DepartamentoDTO> deptosDTO = this.repoDepartamentos.leerDepartamentosXCondominio(condDTO.getId());
         Condominio condo = new Condominio();
         condo.setId(condDTO.getId());
